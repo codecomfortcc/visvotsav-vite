@@ -23,7 +23,9 @@ app.use(cors({
   origin: ['http://localhost:5173', 'https://your-domain.com'],
   credentials: true,
 }));
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 // Routes
 app.use('/api/queries',postQueryRoute)
 
