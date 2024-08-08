@@ -96,7 +96,7 @@ const Navbar = () => {
                   <li className="py-2">
                     <ScrollLink
                       to="home"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground cursor-pointer hover:text-primary"
                       smooth={true}
                       duration={500}
                       onClick={() => setIsSheetOpen(false)}
@@ -110,7 +110,7 @@ const Navbar = () => {
                   <li className="py-2">
                     <ScrollLink
                       to="about"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground cursor-pointer hover:text-primary"
                       smooth={true}
                       duration={500}
                       onClick={() => setIsSheetOpen(false)}
@@ -124,7 +124,7 @@ const Navbar = () => {
                   <li className="py-2">
                     <ScrollLink
                       to="schedule"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground cursor-pointer hover:text-primary"
                       smooth={true}
                       duration={500}
                       onClick={() => setIsSheetOpen(false)}
@@ -139,7 +139,7 @@ const Navbar = () => {
                   <li className="py-2">
                     <ScrollLink
                       to="pricing"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground cursor-pointer hover:text-primary"
                       smooth={true}
                       duration={500}
                       onClick={() => setIsSheetOpen(false)}
@@ -153,7 +153,7 @@ const Navbar = () => {
                   <li className="py-2">
                     <ScrollLink
                       to="contact"
-                      className="text-muted-foreground hover:text-primary"
+                      className="text-muted-foreground cursor-pointer hover:text-primary"
                       smooth={true}
                       duration={500}
                       onClick={() => setIsSheetOpen(false)}
