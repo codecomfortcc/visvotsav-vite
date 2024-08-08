@@ -219,7 +219,7 @@ const RegisterPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center p-4 flex-col gap-4">
       <Card className="w-full max-w-2xl mx-auto shadow-2xl">
         <CardHeader className="bg-primary text-white rounded-t-lg">
-          <CardTitle className="text-2xl font-bold mb-5">
+          <CardTitle className="text-2xl font-bold mb-5 ">
             {steps[step - 1].title}
           </CardTitle>
           <div className="flex justify-between items-center mt-4">
@@ -231,8 +231,8 @@ const RegisterPage = () => {
                                    index + 1 < step
                                      ? "bg-green-500"
                                      : index + 1 === step
-                                     ? "bg-white text-primary"
-                                     : "bg-white text-primary"
+                                     ? "bg-white text-primary ring ring-green-500"
+                                     : "bg-white text-black"
                                  }`}
                 >
                   {index + 1 < step ? (
@@ -241,7 +241,7 @@ const RegisterPage = () => {
                     React.createElement(s.icon)
                   )}
                 </div>
-                <div className="text-xs mt-1">{s.title}</div>
+                
               </div>
             ))}
           </div>
