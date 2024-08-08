@@ -55,7 +55,7 @@ const Navbar = () => {
     >
       <div>
         <h2 className="md:text-2xl text-white text-xl  font-bold">
-          uni engine
+          Visvotsav
           <span className="text-foreground max-sm:hidden text-white">
             {" "}
             {year}
