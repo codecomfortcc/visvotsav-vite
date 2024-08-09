@@ -32,16 +32,10 @@ import {
 } from "@/components/ui/form";
 
 import { SquareChartGantt, Ticket, Users, User, CheckIcon } from "lucide-react";
-const branches = [
-  "CSE",
-  "ECE",
-  "MECH",
-  "CIVIL",
-  "CSE-IOT",
-  "CSE-AIML",
-  "MBA",
-  "EEE",
-];
+import { branches, events } from "@/constants";
+import { useFormSubmit } from "@/hooks/submit";
+import ConfettiPopup from "@/components/submit-popup";
+
 const projectTypeOptions = {
   "Project Expo": ["0", "1", "2", "3"],
   "Technical Quiz": ["0", "1", "2"],
@@ -50,26 +44,22 @@ const projectTypeOptions = {
   "Coding Contest": ["0", "1"],
   Circuitrix: ["0"],
 };
-const events = [
-  "Paper Presentation",
-  "Poster Presentation",
-  "Circuitrix",
-  "Coding Contest",
-  "Technical Quiz",
-  "Project Expo",
-];
 
 const formSchema = z
   .object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     phone: z
       .string()
-      .min(10, { message: "Phone number must be at least 10 digits." }),
+      .min(10, { message: "Phone number must be 10 digits." })
+      .max(10, { message: "Phone number must be 10 digits." })
+      .regex(/^[0-9]{10}$/, {
+        message: "please enter valid number",
+      }),
     email: z.string().email({ message: "Invalid email address." }),
-    eventName: z.enum(events, {
+    event: z.enum(events, {
       errorMap: () => ({ message: "Please select an event." }),
     }),
-    branchName: z.enum(branches, {
+    branch: z.enum(branches, {
       errorMap: () => ({ message: "Please select a branch." }),
     }),
     duNumber: z.string().regex(/^DU[A-Z][1-9][0-9]{6}$/, {
@@ -96,8 +86,9 @@ const formSchema = z
   });
 
 const RegisterPage = () => {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState("");
+  const mutation = useFormSubmit();
 
   const handleProjectTypeChange = (value) => {
     setProjectType(value);
@@ -109,8 +100,8 @@ const RegisterPage = () => {
       name: "",
       phone: "",
       email: "",
-      eventName: "",
-      branchName: "",
+      event: "",
+      branch: "",
       duNumber: "",
       confirmDuNumber: "",
       participants: "",
@@ -121,7 +112,9 @@ const RegisterPage = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // Here you would typically send the data to your backend
+    mutation.mutate(data);
+    form.reset();
+    setStep(1);
   };
 
   const steps = [
@@ -143,8 +136,8 @@ const RegisterPage = () => {
       }
 
       case 2: {
-        // Step 2: Check if eventName and branchName are valid
-        const fields = ["eventName", "branchName"];
+        // Step 2: Check if event and branch are valid
+        const fields = ["event", "branch"];
         return fields.every((field) => {
           const fieldState = form.getFieldState(field);
           return fieldState.isDirty && !fieldState.invalid;
@@ -165,34 +158,32 @@ const RegisterPage = () => {
         return isValid && doNumbersMatch;
       }
 
-      case 4: { 
+      case 4: {
+        const participantsCount = parseInt(form.getValues("participants"));
 
-        const participantsCount = parseInt(form.getValues("participants"))
-        console.log(participantsCount);
-      // Validate that participantsCount is a valid number and within a reasonable range
-      if (isNaN(participantsCount) || participantsCount < 0) {
-        return false;
-      }
-      
-      if (participantsCount === 0) {
-        return true;
-      }
-      
-      const isRadioSelected =
-        form.getFieldState("participants").isDirty &&
-        !form.getFieldState("participants").invalid;
-      
-      const areParticipantDetailsValid = [...Array(participantsCount)].every(
-        (_, index) => {
-          const nameState = form.getFieldState(
-            `participantDetails.${index}.name`
-          );
-          return nameState.isDirty && !nameState.invalid;
+        if (isNaN(participantsCount) || participantsCount < 0) {
+          return false;
         }
-      );
-      
-      return isRadioSelected && areParticipantDetailsValid;
-    }
+
+        if (participantsCount === 0) {
+          return true;
+        }
+
+        const isRadioSelected =
+          form.getFieldState("participants").isDirty &&
+          !form.getFieldState("participants").invalid;
+
+        const areParticipantDetailsValid = [...Array(participantsCount)].every(
+          (_, index) => {
+            const nameState = form.getFieldState(
+              `participantDetails.${index}.name`
+            );
+            return nameState.isDirty && !nameState.invalid;
+          }
+        );
+
+        return isRadioSelected && areParticipantDetailsValid;
+      }
       default:
         return false;
     }
@@ -203,7 +194,7 @@ const RegisterPage = () => {
       step === 1
         ? ["name", "phone", "email"]
         : step === 2
-        ? ["eventName", "branchName"]
+        ? ["event", "branch"]
         : step === 3
         ? ["duNumber", "confirmDuNumber"]
         : ["participants"]
@@ -244,7 +235,6 @@ const RegisterPage = () => {
                     React.createElement(s.icon)
                   )}
                 </div>
-                
               </div>
             ))}
           </div>
@@ -327,7 +317,7 @@ const RegisterPage = () => {
                     <>
                       <FormField
                         control={form.control}
-                        name="eventName"
+                        name="event"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Event</FormLabel>
@@ -338,7 +328,6 @@ const RegisterPage = () => {
                               }}
                               defaultValue={field.value}
                             >
-                              {console.log(projectType)}
                               <FormControl>
                                 <SelectTrigger>
                                   <SelectValue placeholder="Select Event" />
@@ -357,7 +346,7 @@ const RegisterPage = () => {
                       />
                       <FormField
                         control={form.control}
-                        name="branchName"
+                        name="branch"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Branch</FormLabel>
@@ -443,7 +432,6 @@ const RegisterPage = () => {
                               >
                                 {projectTypeOptions[projectType].map(
                                   (value) => (
-                                    
                                     <RadioGroup.Option
                                       key={value}
                                       value={value}
@@ -561,16 +549,24 @@ const RegisterPage = () => {
               ) : (
                 <Button
                   type="submit"
-                  disabled={!isStepValid()}
-                  className=" bg-green-500  text-white"
+                  disabled={!isStepValid() || mutation.isPending}
+                  className=" bg-green-500 disabled:bg-gray-500 text-white"
                 >
-                  Submit
+                  {mutation.isPending ? "Submitting..." : "Submit"}
                 </Button>
               )}
             </CardFooter>
           </form>
         </Form>
       </Card>
+      <ConfettiPopup 
+        isOpen={mutation.isSuccess || mutation.isError}
+        onClose={() => mutation.reset()}
+        isSuccess={mutation.isSuccess}
+        title={mutation.isSuccess? "Registration Successful!" : "Registration Failed!"}
+        isLoading={mutation.isPending}
+        description={mutation.isSuccess? "You have successfully registered. You will redirect to home  by clicking button below" : "There was an error while registering. Please try again."}
+      />
     </div>
   );
 };

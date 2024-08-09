@@ -6,12 +6,14 @@ import { Card } from "@/components/ui/card";
 import { Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { home } from "@/constants";
+import { useLocation } from "react-router-dom";
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [isCollapsed, setIsCollapsed] = useState(false);
-
+  const location = useLocation();
   useEffect(() => {
+    if(location.pathname === '/register') setIsCollapsed(true)
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -45,7 +47,7 @@ const CountdownTimer = () => {
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
-
+ 
   return (
     <AnimatePresence>
       <motion.div

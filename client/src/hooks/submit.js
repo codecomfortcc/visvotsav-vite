@@ -1,13 +1,22 @@
-import { useMutation } from '@tanstack/react-query';
-
+import { useToast } from "@/components/ui/use-toast";
+import { postQuery, postSubmit } from "@/services/api";
+import { useMutation } from "@tanstack/react-query";
 
 export const useQuerySubmit = () => {
-return useMutation({
-  mutationFn:postQuery,
-})
-};
-export const useFormSubmit =()=>{
+  const toast = useToast();
   return useMutation({
-    mutationFn:postQuery,
-  })
-}
+    mutationFn: postQuery,
+    onError: (data) => {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        message: `${data.message}`,
+      });
+    },
+  });
+};
+export const useFormSubmit = () => {
+  return useMutation({
+    mutationFn: postSubmit,
+  });
+};

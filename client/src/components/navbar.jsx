@@ -12,11 +12,13 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0 );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
+
   const location = useLocation();
   const handleSheetOpen = () => {
     setScrollPosition(window.scrollY);
@@ -51,9 +53,9 @@ const Navbar = () => {
       }`}
     >
       <div>
-        <h2 className="md:text-2xl text-white text-xl  font-bold">
+        <h2 className={cn('md:text-2xl text-white text-xl  font-bold',location.pathname=== '/'?'text-white': 'text-black')}>
           Visvotsav
-          <span className="text-foreground max-sm:hidden text-white">
+          <span className=" max-sm:hidden ">
             {" "}
             {year}
           </span>
@@ -80,8 +82,8 @@ const Navbar = () => {
             }}
           >
             <SheetTrigger asChild>
-              <Button variant={"ghost"}>
-                <Menu className="h-6 w-6" />
+              <Button variant={"ghost"} className={cn(location.pathname ==='/register' && 'text-black hover:bg-black/10')}  >
+                <Menu className={cn("h-6 w-6")}/>
               </Button>
             </SheetTrigger>
             <SheetContent>

@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
+import { useQuerySubmit } from "@/hooks/submit"
  
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -28,7 +29,7 @@ const formSchema = z.object({
 })
  
 function ContactFrom() {
-  // ...
+  const mutation=useQuerySubmit();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,7 +43,7 @@ function ContactFrom() {
   function onSubmit(values) {
     console.log(values)
     // Send the form data to the server
-    
+    mutation.mutate(values);
     form.reset()
   }
   return (

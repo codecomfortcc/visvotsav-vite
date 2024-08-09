@@ -3,7 +3,7 @@ import { Download } from "lucide-react";
 const date = new Date()
 const year= date.getFullYear()
 const homeData =  {
-      lastDate: '2024-03-31',
+      lastDate: '2024-09-10',
       id:'college name',
       collegeName: 'PBR Visvodaya Institute of Technology and Science',
       event: 'Visovtsav',

@@ -2,8 +2,9 @@ import { postFormService } from "../services/form.services.js";
 
 export const postForm = async (req, res) => {
   try {
-    const data = req.body;
-    const response=postFormService(data);
+    const data = req.validatedData;
+    const response= await postFormService(data);
+    console.log(response)
     res.status(200).json(response);
   } catch (error) {
     res.status(500).json({

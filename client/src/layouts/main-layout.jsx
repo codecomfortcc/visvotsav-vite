@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from '@/components/footer';
 import CountdownTimer from '@/components/timer';
+import { Toaster } from '@/components/ui/toaster';
 
 gsap.registerPlugin(ScrollTrigger);
 const MainLayout = () => {
@@ -26,6 +27,7 @@ const MainLayout = () => {
       <footer >
         <Footer/>
       </footer>
+   
       <CountdownTimer/>
     </div>
   );
