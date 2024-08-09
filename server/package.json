@@ -4,11 +4,10 @@
   "main": "index.js",
   "type": "module",
  "scripts": {
-    "start": "node server/index.js",
-    "build": "cd client && npm install && npm run build"
+    "start": "index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "masani yasovardhan",
   "license": "ISC",
   "description": "",
   "dependencies": {

@@ -15,17 +15,10 @@ const PORT = process.env.PORT || 4000;
 
 // Middleware setup
 app.use(express.json());
-//serve static files
-
-app.use(express.static(join(__dirname, "..",'client','dist')));
-// Enable CORS for development
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://your-domain.com'],
+  origin: ['http://localhost:5173', 'https://visvotsav.vercel.app'],
   credentials: true,
 }));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
 // Routes
 app.use('/api/queries',postQueryRoute)
 
