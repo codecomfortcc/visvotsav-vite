@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://visovtsav-server.vercel.app/";
+const BASE_URL = "https://visvotsav-server.vercel.app/";
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export const postQuery = async (data) => {
