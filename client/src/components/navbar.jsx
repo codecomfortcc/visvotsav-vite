@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 
 const Navbar = () => {
-  const [scrollPosition, setScrollPosition] = useState(0 + 22);
+  const [scrollPosition, setScrollPosition] = useState(0 );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isTransparent, setIsTransparent] = useState(true);
   const location = useLocation();
@@ -26,6 +26,7 @@ const Navbar = () => {
   const handleSheetClose = () => {
     setIsSheetOpen(false);
   };
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -38,11 +39,7 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  useEffect(() => {
-    if (!isSheetOpen) {
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [isSheetOpen, scrollPosition]);
+
 
   const date = new Date();
   const year = date.getFullYear();

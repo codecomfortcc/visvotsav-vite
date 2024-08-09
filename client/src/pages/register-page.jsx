@@ -43,12 +43,12 @@ const branches = [
   "EEE",
 ];
 const projectTypeOptions = {
-  "Project Expo": [0, 1, 2, 3],
-  "Technical Quiz": [0, 1, 2],
-  "Paper Presentation": [0, 1],
-  "Poster Presentation": [0, 1],
-  "Coding Contest": [0, 1],
-  Circuitrix: [0],
+  "Project Expo": ["0", "1", "2", "3"],
+  "Technical Quiz": ["0", "1", "2"],
+  "Paper Presentation": ["0", "1"],
+  "Poster Presentation": ["0", "1"],
+  "Coding Contest": ["0", "1"],
+  Circuitrix: ["0"],
 };
 const events = [
   "Paper Presentation",
@@ -79,7 +79,7 @@ const formSchema = z
     confirmDuNumber: z
       .string()
       .min(1, { message: "Please confirm your DU Number." }),
-    participants: z.enum([0, 1, 2, 3]),
+    participants: z.enum(["0", "1", "2", "3"]),
     participantDetails: z
       .array(
         z.object({
@@ -113,7 +113,7 @@ const RegisterPage = () => {
       branchName: "",
       duNumber: "",
       confirmDuNumber: "",
-      participants: "0",
+      participants: "",
       participantDetails: [],
     },
     mode: "onChange",
@@ -165,31 +165,34 @@ const RegisterPage = () => {
         return isValid && doNumbersMatch;
       }
 
-      case 4: {
-        const participantsCount = form.getFieldState("participants").value;
+      case 4: { 
 
-        // Validate that participantsCount is a valid number and within a reasonable range
-        if (isNaN(participantsCount) || participantsCount < 0) {
-          return false;
-        }
-        if (participantsCount === 0) {
-          return true;
-        }
-        const isRadioSelected =
-          form.getFieldState("participants").isDirty &&
-          !form.getFieldState("participants").invalid;
-        const areParticipantDetailsValid = [...Array(participantsCount)].every(
-          (_, index) => {
-            const nameState = form.getFieldState(
-              `participantDetails.${index}.name`
-            );
-            return nameState.isDirty && !nameState.invalid;
-          }
-        );
-
-        return isRadioSelected && areParticipantDetailsValid;
+        const participantsCount = parseInt(form.getValues("participants"))
+        console.log(participantsCount);
+      // Validate that participantsCount is a valid number and within a reasonable range
+      if (isNaN(participantsCount) || participantsCount < 0) {
+        return false;
       }
-
+      
+      if (participantsCount === 0) {
+        return true;
+      }
+      
+      const isRadioSelected =
+        form.getFieldState("participants").isDirty &&
+        !form.getFieldState("participants").invalid;
+      
+      const areParticipantDetailsValid = [...Array(participantsCount)].every(
+        (_, index) => {
+          const nameState = form.getFieldState(
+            `participantDetails.${index}.name`
+          );
+          return nameState.isDirty && !nameState.invalid;
+        }
+      );
+      
+      return isRadioSelected && areParticipantDetailsValid;
+    }
       default:
         return false;
     }
@@ -216,7 +219,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center p-4 flex-col gap-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex pt-20 p-4 flex-col gap-4">
       <Card className="w-full max-w-2xl mx-auto shadow-2xl">
         <CardHeader className="bg-primary text-white rounded-t-lg">
           <CardTitle className="text-2xl font-bold mb-5 ">
@@ -440,6 +443,7 @@ const RegisterPage = () => {
                               >
                                 {projectTypeOptions[projectType].map(
                                   (value) => (
+                                    
                                     <RadioGroup.Option
                                       key={value}
                                       value={value}
@@ -470,8 +474,8 @@ const RegisterPage = () => {
                                                       : "text-gray-900"
                                                   }`}
                                                 >
-                                                  {value === 0
-                                                    ? "Only Me"
+                                                  {value === "0"
+                                                    ? `Only Me`
                                                     : `${value} participant${
                                                         value !== "1" ? "s" : ""
                                                       }`}
@@ -558,7 +562,7 @@ const RegisterPage = () => {
                 <Button
                   type="submit"
                   disabled={!isStepValid()}
-                  className="bg-gradient-to-r from-green-500 to-emerald-600 text-white"
+                  className=" bg-green-500  text-white"
                 >
                   Submit
                 </Button>

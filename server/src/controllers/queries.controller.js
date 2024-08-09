@@ -1,4 +1,4 @@
-import {postQueryService} from '../services/queires.services.js';
+import {postQueryService} from '../services/queries.services.js';
 export const postQuery = async(req,res)=>{
   try{
     const data = req.body;

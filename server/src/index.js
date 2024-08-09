@@ -1,0 +1,35 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import postQueryRoute from "./routes/queries.routes.js";
+import postFormRoute from "./routes/form.routes.js";
+// Load environment variables from.env file
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware setup
+app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://visvotsav.vercel.app"],
+    credentials: true,
+  })
+);
+// Routes
+app.get("*", (req, res, next) => {
+  const path = req.path;
+  if (!path.startsWith("/api")) {
+    return res.redirect('https://visvotsav.vercel.app');
+  }
+  next();
+});
+app.use("/api/queries", postQueryRoute);
+app.use("/api/form-submit", postFormRoute);
+
+app.listen(PORT, function () {
+  console.log(`Server is running
+    at http://localhost:${PORT}`);
+});

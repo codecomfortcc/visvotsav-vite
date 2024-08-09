@@ -236,7 +236,7 @@ const MainPage = () => {
       </section>
     </Element>
       {/* contact section */}
-      <Element name='contact' className='pt-5'>
+      <Element name='contact' className='pt-5 pb-10'>
       <section
 
         className="w-full p-3  flex-col flex  mt-5 items-center"

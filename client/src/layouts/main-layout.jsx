@@ -5,6 +5,7 @@ import { Outlet} from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Footer from '@/components/footer';
+import CountdownTimer from '@/components/timer';
 
 gsap.registerPlugin(ScrollTrigger);
 const MainLayout = () => {
@@ -17,12 +18,15 @@ const MainLayout = () => {
       <header>
       <Navbar />
       </header>
+
       <main >
         <Outlet />
       </main>
+
       <footer >
         <Footer/>
       </footer>
+      <CountdownTimer/>
     </div>
   );
 };
