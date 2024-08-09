@@ -9,6 +9,7 @@ export default defineConfig({
     },
   },
   build: {
-    sourcemap: false, // Disable source maps
+    sourcemap: false, 
+    outDir: 'dist',
   },
 })
