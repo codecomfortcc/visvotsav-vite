@@ -22,7 +22,7 @@ app.use(
 app.get("*", (req, res, next) => {
   const path = req.path;
   if (!path.startsWith("/api")) {
-    return res.redirect('https://visvotsav.vercel.app');
+    return res.redirect(301, "https://visvotsav.vercel.app");
   }
   next();
 });
