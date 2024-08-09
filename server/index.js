@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import postQueryRoute from "./routes/queries.routes.js";
-import postFormRoute from "./routes/form.routes.js";
+import postQueryRoute from "./src/routes/queries.routes.js";
+import postFormRoute from "./src/routes/form.routes.js";
 // Load environment variables from.env file
 
 dotenv.config();
