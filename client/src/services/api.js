@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'http://localhost:4000/';
+const BASE_URL = "https://visovtsav-server.vercel.app/";
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export const postQuery = async (data) => {
-  return await axiosInstance.post('/api/queries', data);
-}
+  return await axiosInstance.post("/api/queries", data);
+};
 
 export const postSubmit = async (data) => {
-  const formData={
+  const formData = {
     name: data.name,
     phone: data.phone,
     email: data.email,
@@ -16,8 +16,8 @@ export const postSubmit = async (data) => {
     branch: data.branch,
     duNumber: data.duNumber,
     participants: data.participants,
-    participantsDetails:[...data.participantDetails]
-  }
-  console.log(formData)
-  return await axiosInstance.post('/api/form-submit', formData);
-}
+    participantsDetails: [...data.participantDetails],
+  };
+  console.log(formData);
+  return await axiosInstance.post("/api/form-submit", formData);
+};
