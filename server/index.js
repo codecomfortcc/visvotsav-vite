@@ -21,7 +21,9 @@ app.use(cors({
 }));
 // Routes
 app.use('/api/queries',postQueryRoute)
-
+app.get('/',(req,res)=>{
+  res.status(200).send('Welcome to visvotsav')
+})
 app.listen(PORT, function(){
   console.log(`Server is running
     at http://localhost:${PORT}`)
