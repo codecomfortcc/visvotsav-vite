@@ -41,8 +41,12 @@ const formSchema = joi.object({
 export const validateForm = (req, res, next) => {
   const { error } = formSchema.validate(req.body);
   if (error) {
-    return res.status(400).json({ error: error.details.map((err) => err.message).join(',') });
+    console.log(error.message);
+    res.status(400).json({ error: error.details.map((err) => err.message).join(',') });
   }
-  req.validatedData = req.body;
-  next();
+  else{
+    req.validatedData = req.body;
+    next();
+  }
+
 }

@@ -8,15 +8,13 @@ export const postFormService = async (data) => {
 
   try {
     // Fetch the spreadsheet dynamically to get the updated list of sheets
-    const spreadsheet = await sheets.spreadsheets.get({
-      spreadsheetId: process.env.SPREADSHEET_ID,
-    });
-
+    // const spreadsheet = await sheets.spreadsheets.get({
+    //   spreadsheetId: process.env.SPREADSHEET_ID,
+    // });
 
     // const sheetExists = spreadsheet.data.sheets.some(
     //   (sheet) => sheet.properties.title === sheetName
     // );
-
 
     // if (!sheetExists) {
     //   await sheets.spreadsheets.batchUpdate({
@@ -49,7 +47,7 @@ export const postFormService = async (data) => {
         ...data.participantsDetails.map((participant) => participant.name),
       ],
     ];
-
+    console.log(values);
     // Append the data to the sheet
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SPREADSHEET_ID,

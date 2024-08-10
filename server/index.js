@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: [ "https://visvotsav.vercel.app"],
+    origin: ["https://visvotsav.vercel.app"],
     credentials: true,
   })
 );
@@ -30,6 +30,5 @@ app.use("/api/queries", postQueryRoute);
 app.use("/api/form-submit", postFormRoute);
 
 app.listen(PORT, function () {
-  console.log(`Server is running
-    at http://localhost:${PORT}`);
+  console.log(`Server is running at ${PORT}`);
 });
