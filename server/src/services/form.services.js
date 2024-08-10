@@ -61,6 +61,6 @@ export const postFormService = async (data) => {
     return { success: true, message: `Data added to sheet ${sheetName}.` };
   } catch (e) {
     console.error("Error handling Google Sheets:", e);
-    return { success: false, message: "Failed to process the form data." };
+    throw new Error( { success: false, message: "Failed to process the form data." });
   }
 };
