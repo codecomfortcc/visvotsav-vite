@@ -8,8 +8,8 @@ const homeData =  {
       collegeName: 'PBR Visvodaya Institute of Technology and Science',
       event: 'Visovtsav',
       eventYear:year,
-      eventMonth:"APR",
-      eventDate: '1-3 ',
+      eventMonth:"SEP",
+      eventDate: '14-15 ',
       suffix:'th',
       downloadSize:"3 MB",
       eventAddress: 'UdayaGiri Road,Kavali ,Nellore district'

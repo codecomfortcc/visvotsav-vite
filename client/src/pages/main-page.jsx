@@ -3,7 +3,7 @@ import { about, pricing, home, scheduleData } from "@/constants";
 import GoogleMaps from "@/components/google-maps";
 import backgroundVideo from "@/assets/background.mp4";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import posterImage from "@/assets/clg.jpg";
+import posterImage from "@/assets/banner.jpg";
 import ContactForm from "@/components/contact-form";
 import { Element, Link } from "react-scroll";
 import { AnimatePresence, motion, useAnimation } from "framer-motion";

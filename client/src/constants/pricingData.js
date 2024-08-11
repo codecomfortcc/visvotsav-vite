@@ -70,7 +70,7 @@ const pricingData=[
     {
         id:'coding',
         title:'Coding Contest',
-        price:'100/-',
+        price:'200/-',
         details: [
             {
                 id:'coding Description 1',
