@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -32,64 +31,20 @@ import {
 } from "@/components/ui/form";
 
 import { SquareChartGantt, Ticket, Users, User, CheckIcon } from "lucide-react";
-import { branches, events } from "@/constants";
+import { branches, events, projectTypeOptions,formSchema } from "@/constants";
 import { useFormSubmit } from "@/hooks/submit";
 import ConfettiPopup from "@/components/submit-popup";
+import { toast } from "@/components/ui/use-toast";
 
-const projectTypeOptions = {
-  "Project Expo": ["0", "1", "2", "3"],
-  "Technical Quiz": ["0", "1", "2"],
-  "Paper Presentation": ["0", "1"],
-  "Poster Presentation": ["0", "1"],
-  "Coding Contest": ["0", "1"],
-  Circuitrix: ["0"],
-};
 
-const formSchema = z
-  .object({
-    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-    phone: z
-      .string()
-      .min(10, { message: "Phone number must be 10 digits." })
-      .max(10, { message: "Phone number must be 10 digits." })
-      .regex(/^[0-9]{10}$/, {
-        message: "please enter valid number",
-      }),
-    email: z.string().email({ message: "Invalid email address." }),
-    event: z.enum(events, {
-      errorMap: () => ({ message: "Please select an event." }),
-    }),
-    branch: z.enum(branches, {
-      errorMap: () => ({ message: "Please select a branch." }),
-    }),
-    duNumber: z.string().regex(/^DU[A-Z][1-9][0-9]{6}$/, {
-      message:
-        "DU number must be in the format DU(one letter)(7 digits from 1-9)",
-    }),
-    confirmDuNumber: z
-      .string()
-      .min(1, { message: "Please confirm your DU Number." }),
-    participants: z.enum(["0", "1", "2", "3"]),
-    participantDetails: z
-      .array(
-        z.object({
-          name: z.string().min(2, {
-            message: "Participant name must be at least 2 characters.",
-          }),
-        })
-      )
-      .optional(),
-  })
-  .refine((data) => data.duNumber === data.confirmDuNumber, {
-    message: "DU Numbers do not match",
-    path: ["confirmDuNumber"],
-  });
 
 const RegisterPage = () => {
   const [step, setStep] = useState(1);
   const [projectType, setProjectType] = useState("");
   const mutation = useFormSubmit();
-
+  useEffect(() => {
+    document.title = 'Register Form - visvotsav';
+  }, []);
   const handleProjectTypeChange = (value) => {
     setProjectType(value);
   };
@@ -114,7 +69,6 @@ const RegisterPage = () => {
     console.log(data);
     mutation.mutate(data);
     form.reset();
-    setStep(1);
   };
 
   const steps = [
@@ -559,13 +513,21 @@ const RegisterPage = () => {
           </form>
         </Form>
       </Card>
-      <ConfettiPopup 
+      <ConfettiPopup
         isOpen={mutation.isSuccess || mutation.isError}
         onClose={() => mutation.reset()}
         isSuccess={mutation.isSuccess}
-        title={mutation.isSuccess? "Registration Successful!" : "Registration Failed!"}
+        title={
+          mutation.isSuccess
+            ? "Registration Successful!"
+            : "Registration Failed!"
+        }
         isLoading={mutation.isPending}
-        description={mutation.isSuccess? "You have successfully registered. You will redirect to home  by clicking button below" : "There was an error while registering. Please try again."}
+        description={
+          mutation.isSuccess
+            ? "You have successfully registered. You will redirect to home  by clicking button below"
+            : "There was an error while registering. Please try again."
+        }
       />
     </div>
   );

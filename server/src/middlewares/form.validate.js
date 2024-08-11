@@ -14,7 +14,7 @@ const formSchema = joi.object({
   branch: joi.string().valid(...branchArray).required(),
   duNumber: joi.string().pattern(/^DU[A-Z][1-9][0-9]{6}$/).required(),
   participants: joi.number().integer().required().when('event', {
-    is: joi.valid('Paper Presentation', 'Poster Presentation', 'Coding Contest'),
+    is: joi.valid('Paper Presentation', 'Poster Presentation', 'Coding Contest','Web Designing'),
     then: joi.number().integer().min(0).max(1),
     otherwise: joi.when('event', {
       is: 'Circuitrix',

@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Card } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { useQuerySubmit } from "@/hooks/submit"
+import { toast } from "./ui/use-toast"
  
 const formSchema = z.object({
   name: z.string().min(2, {

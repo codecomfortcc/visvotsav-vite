@@ -8,6 +8,8 @@ import {
   coConveners,
 } from "@/constants/footerData";
 
+
+
 const FooterBody = () => {
   return (
     <div className="bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -62,7 +64,6 @@ const FooterBody = () => {
     </div>
   );
 };
-
 const FooterSection = ({ title, items, showContact }) => (
   <div className="space-y-4">
     <h3 className="text-xl font-semibold text-yellow-300">{title}</h3>
