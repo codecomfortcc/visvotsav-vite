@@ -1,6 +1,6 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Clock } from "lucide-react";
@@ -13,7 +13,7 @@ const CountdownTimer = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   useEffect(() => {
-    if(location.pathname === '/register') setIsCollapsed(true)
+    if (location.pathname === "/register") setIsCollapsed(true);
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -32,8 +32,7 @@ const CountdownTimer = () => {
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
       };
-    }
-    else{
+    } else {
       timeLeft = {
         days: 0,
         hours: 0,
@@ -43,11 +42,11 @@ const CountdownTimer = () => {
     }
     return timeLeft;
   }
- 
+
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
- 
+
   return (
     <AnimatePresence>
       <motion.div
@@ -107,7 +106,6 @@ const TimeUnit = ({ value, unit }) => (
         })}
       />
     </div>
-    
   </div>
 );
 

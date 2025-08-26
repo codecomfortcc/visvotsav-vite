@@ -184,7 +184,7 @@ const MainPage = () => {
               <Link
                 to="about"
                 smooth={true}
-                className="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105"
+                className="bg-primary hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105 cursor-pointer"
               >
                 Know More
               </Link>

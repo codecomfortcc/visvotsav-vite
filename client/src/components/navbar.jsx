@@ -14,10 +14,10 @@ import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { cn } from "@/lib/utils";
 import { navbar } from "@/constants";
-import Marquee from "./marquee";
+// import Marquee from "./marquee";
 import { useAnimation, motion } from "framer-motion";
 const Navbar = () => {
-  const [isMarqueeVisible, setIsMarqueeVisible] = useState(true);
+  // const [isMarqueeVisible, setIsMarqueeVisible] = useState(true);
   const [isTransparent, setIsTransparent] = useState(true);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const location = useLocation();
@@ -26,11 +26,11 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      setIsMarqueeVisible(scrollPosition < 10);
+      // setIsMarqueeVisible(scrollPosition < 10);
       setIsTransparent(scrollPosition < 10);
 
       controls.start({
-        y: isMarqueeVisible ? 0 : -5,
+        // y: isMarqueeVisible ? 0 : -5,
         backgroundColor: isTransparent ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, )",
         transition: { duration: 0.3 },
       });
@@ -38,14 +38,14 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMarqueeVisible, isTransparent, controls]);
+  }, [isTransparent, controls]);
 
   const handleSheetOpen = () => setIsSheetOpen(true);
   const handleSheetClose = () => setIsSheetOpen(false);
 
   return (
     <>
-      <Marquee isVisible={isMarqueeVisible} />
+      {/* <Marquee isVisible={isMarqueeVisible} /> */}
       <motion.nav
         className={cn("w-full h-16 text-white backdrop-blur flex justify-between items-center px-3 py-4 fixed z-50")}
         initial={{ y: 0, backgroundColor: "rgba(0, 0, 0, 0)" }}
